@@ -15,6 +15,10 @@ const productShcema = mongoose.Schema(
             type: Number,
             required: true,
         },
+        measurement: {
+            type: String,
+            required: true,
+        },
         image: {
             type: String,
             required: false

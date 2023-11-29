@@ -1,8 +1,8 @@
-require('dotenv').config()
-const express = require('express')
+require('dotenv').config();
+const express = require('express');
 const mongoose = require('mongoose');
 const productRoute = require('./routes/productRoute');
-const errorMiddleware = require('./middleware/errorMiddleware')
+const errorMiddleware = require('./middleware/errorMiddleware');
 var cors = require('cors');
 
 const app = express();
@@ -17,7 +17,8 @@ var corsOptions = {
 }
 
 app.use(express.json());
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/product', productRoute);
@@ -36,6 +37,7 @@ mongoose.connect(MONGO_URL)
         console.log('connected to mongo db');
         app.listen(PORT, () => {
             console.log(`Port working in http://localhost:${PORT}`);
+            console.log(`current working Cors is ${FRONTEND}`);
         });
     }).catch((error) => {
         console.log(error);
