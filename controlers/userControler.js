@@ -69,10 +69,40 @@ const deleteUser = asyncHandler( async(req, res) => {
     }
 });
 
+const loginUser = async (req, res) => {
+    const { phoneNumber, password } = req.body;
+    try {
+      const user = await UserModel.findOne({ phoneNumber, password });
+      if (user) {
+        res.status(200).json({ user, message: 'PhoneNumber has been Already a User!' });
+      } else {
+        res.status(401).json({ message: 'User not found in Phone/Password' });
+      }
+    } catch (err) {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  };
+
+  const existingUser = async (req, res) => {
+    const { phone } = req.body;
+    try {
+      const user = await UserModel.findOne({ phone });
+      if (user) {
+        res.status(200).json({ user, message: 'PhoneNumber has been Already a User!' });
+      } else {
+        res.status(401).json({ message: 'User not found in Phone/Password' });
+      }
+    } catch (err) {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  };
+  
 module.exports = {
     getUsers,
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser,
+    existingUser
 }
