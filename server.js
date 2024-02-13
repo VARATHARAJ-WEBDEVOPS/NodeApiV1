@@ -24,6 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/product', productRoute);
 app.use('/api/users', userRoute);
+app.post('/api/login', (req, res) => {
+  res.redirect('https://quick-kart-63da8.web.app/dashboard')
+});
 
 app.get('/', (req, res) => {
     // throw new Error('fake error')
